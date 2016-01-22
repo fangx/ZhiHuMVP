@@ -193,7 +193,7 @@ public class HomeActivity extends BaseAppCompatActivity {
                 openDrawer();
                 return true;
             case R.id.action_share:
-                BaseUtil.share(this, "分享应用", "www.baidu.com");
+                BaseUtil.share(this, "分享项目地址", "https://github.com/fangx/ZhiHuMVP");
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Zhihu.iml" filepath="$PROJECT_DIR$/Zhihu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZhiHuMVP.iml" filepath="$PROJECT_DIR$/ZhiHuMVP.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
     </modules>
