@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/theme_text_white"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:id="@+id/tag_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_bg"
+        android:paddingTop="10dp"
+        android:paddingBottom="2dp"
+        android:text="热门问答"
+        android:textColor="@color/tag_text_color"
+        android:textSize="@dimen/text_size_14" />
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="2dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/title_text_bg"
+        android:text="百度和Google的搜索技术是一个数量级吗？"
+        android:textColor="@color/title_text_color"
+        android:textSize="@dimen/text_size_16" />
+
+    <LinearLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_bg"
+        android:paddingBottom="15dp"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/num_text_bg"
+            android:gravity="center"
+            android:text="6.0K"
+            android:textColor="@color/num_text_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:text="很多答案是从使用上讲的，我加两个技术方面的。搜索引擎需要对抓取到的结果进行管理。当索引结果越来越多时，保证存储和查询速度"
+            android:textColor="@color/content_text_color"
+            android:lineSpacingExtra="5dp"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+</LinearLayout>
