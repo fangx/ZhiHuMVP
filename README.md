@@ -1,6 +1,6 @@
 # ZhiHuMVP
 仿知乎客户端
-![](https://github.com/fangx/ZhiHuMVP/blob/master/home.png)
+![效果图](https://github.com/fangx/ZhiHuMVP/blob/master/zhihu.gif)
 
 
 本项目包含以下知识点：
