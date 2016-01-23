@@ -50,12 +50,6 @@ public class HomePresenter extends BasePresenter<HomeListView> {
         mSubscription = homeListService.getHomeArticleList(date)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-//                .doOnNext(new Action1<ArticleListEntity>() {
-//                    @Override
-//                    public void call(ArticleListEntity articleListEntity) {
-//                        saveDataToDBorSP(articleListEntity);
-//                    }
-//                })
                 .subscribe(new Observer<ArticleListEntity>() {
                     @Override
                     public void onCompleted() {
