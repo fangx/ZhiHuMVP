@@ -1,37 +1,41 @@
 package me.fangx.zhihu.ui.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import butterknife.Bind;
 import me.fangx.common.util.eventbus.EventCenter;
 import me.fangx.zhihu.R;
+import me.fangx.zhihu.adapter.ExplorePagerAdapter;
 
 /**
- * Created by fangxiao on 15/12/28.
- * <p/>
- * 收藏
+ * Created by fangxiao on 16/1/25.
  */
-public class CollectFragment extends BaseFragment {
+public class ExploreChildFragment extends BaseFragment {
 
-    @Bind(R.id.collect_content)
-    LinearLayout collect_content;
+    @Bind(R.id.explore_child_content)
+    LinearLayout explore_child_content;
+
+    //页面标识
+    private String tag = "";
 
     @Override
     protected void initViewsAndEvents() {
-
-        showEmpty(getResources().getString(R.string.drawer_collect_empty), new View.OnClickListener() {
+        Bundle bundle = getArguments();
+        tag = bundle.getString(ExplorePagerAdapter.EXPLORE_TAG);
+        showEmpty("暂无" + tag, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
-        }, R.drawable.img_empty_collection);
+        });
 
     }
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.collect_layout;
+        return R.layout.explore_child_layout;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class CollectFragment extends BaseFragment {
 
     @Override
     protected View getLoadingTargetView() {
-        return collect_content;
+        return explore_child_content;
     }
 
     @Override

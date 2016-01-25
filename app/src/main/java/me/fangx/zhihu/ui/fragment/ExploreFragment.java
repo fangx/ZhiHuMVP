@@ -1,5 +1,8 @@
 package me.fangx.zhihu.ui.fragment;
 
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -7,6 +10,7 @@ import butterknife.Bind;
 import me.fangx.common.ui.fragment.BaseLazyFragment;
 import me.fangx.common.util.eventbus.EventCenter;
 import me.fangx.zhihu.R;
+import me.fangx.zhihu.adapter.ExplorePagerAdapter;
 
 /**
  * Created by fangxiao on 15/12/28.
@@ -17,17 +21,18 @@ public class ExploreFragment extends BaseFragment {
 
     @Bind(R.id.explore_content)
     LinearLayout explore_content;
-
+    @Bind(R.id.explore_pager_tabs)
+    TabLayout explore_pager_tabs;
+    @Bind(R.id.explore_pager)
+    ViewPager explore_pager;
 
     @Override
     protected void initViewsAndEvents() {
-        showEmpty("暂无发现", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
+        explore_pager.setOffscreenPageLimit(ExplorePagerAdapter.PAGE_COUNT);
+        ExplorePagerAdapter adapter = new ExplorePagerAdapter(getSupportFragmentManager());
+        explore_pager.setAdapter(adapter);
+        explore_pager_tabs.setupWithViewPager(explore_pager);
+//        explore_pager_tabs.setTabMode(TabLayout.MODE_FIXED);
     }
 
     @Override
@@ -64,6 +69,5 @@ public class ExploreFragment extends BaseFragment {
     protected boolean isBindEventBusHere() {
         return false;
     }
-
 
 }

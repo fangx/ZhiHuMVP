@@ -1,5 +1,6 @@
 package me.fangx.zhihu.ui.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 
 import me.fangx.common.ui.fragment.BaseLazyFragment;

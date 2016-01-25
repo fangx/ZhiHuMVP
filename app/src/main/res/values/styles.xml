@@ -22,7 +22,7 @@
         <item name="android:background">?attr/colorPrimary</item>
     </style>
 
-    <style name="ToolbarPopUp" parent ="ThemeOverlay.AppCompat.Light">
+    <style name="ToolbarPopUp" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:background">@color/theme_window_background</item>
     </style>
 
@@ -47,4 +47,29 @@
         <item name="contentScrim">?attr/colorPrimary</item>
     </style>
 
+    <style name="pagerStyle" parent="baseLayoutParam">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="baseLayoutParam">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="tabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="tabTextAppearance">@style/tabTextAppearance</item>
+        <item name="tabPaddingStart">16dp</item>
+        <item name="tabPaddingEnd">16dp</item>
+        <item name="tabBackground">@color/colorPrimary</item>
+        <item name="tabIndicatorColor">@android:color/white</item>
+        <item name="tabMode">scrollable</item>
+    </style>
+
+    <style name="tabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="textAllCaps">true</item>
+    </style>
 </resources>

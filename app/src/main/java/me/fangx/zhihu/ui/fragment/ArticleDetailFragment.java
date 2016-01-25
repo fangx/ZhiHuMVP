@@ -31,7 +31,6 @@ import me.fangx.zhihu.utils.DummyContent;
  */
 public class ArticleDetailFragment extends BaseFragment {
 
-
     public static final String ARG_ITEM_INFO = "item_info";
 
     private ArticleListBean articleListBean;

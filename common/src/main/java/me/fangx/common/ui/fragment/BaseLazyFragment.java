@@ -230,6 +230,7 @@ public abstract class BaseLazyFragment extends Fragment {
      * get loading target view
      */
     protected abstract View getLoadingTargetView();
+
     /**
      * when event comming
      *
@@ -353,13 +354,13 @@ public abstract class BaseLazyFragment extends Fragment {
      *
      * @param toggle
      */
-    protected void toggleShowEmpty(boolean toggle, String msg, View.OnClickListener onClickListener,int img) {
+    protected void toggleShowEmpty(boolean toggle, String msg, View.OnClickListener onClickListener, int img) {
         if (null == mVaryViewHelperController) {
             throw new IllegalArgumentException("You must return a right target view for loading");
         }
 
         if (toggle) {
-            mVaryViewHelperController.showEmpty(msg, onClickListener,img);
+            mVaryViewHelperController.showEmpty(msg, onClickListener, img);
         } else {
             mVaryViewHelperController.restore();
         }

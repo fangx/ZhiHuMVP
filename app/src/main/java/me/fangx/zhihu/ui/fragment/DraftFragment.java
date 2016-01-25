@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import butterknife.Bind;
-import me.fangx.common.ui.fragment.BaseLazyFragment;
 import me.fangx.common.util.eventbus.EventCenter;
 import me.fangx.zhihu.R;
 

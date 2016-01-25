@@ -88,27 +88,6 @@ public class HomeListFragment extends BaseFragment implements HomeListView {
         page = 1;
         homePresenter.loadList(page);
 
-
-//      swiperefresh.setRefreshing(true);
-
-
-//        hao_recycleview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Toast.makeText(mContext, "click-----position" + i, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//
-//        hao_recycleview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Toast.makeText(mContext, "long click------position" + i, Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        });
-
-
     }
 
 
@@ -167,6 +146,5 @@ public class HomeListFragment extends BaseFragment implements HomeListView {
     protected boolean isBindEventBusHere() {
         return false;
     }
-
 
 }

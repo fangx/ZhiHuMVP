@@ -8,30 +8,28 @@ import me.fangx.common.util.eventbus.EventCenter;
 import me.fangx.zhihu.R;
 
 /**
- * Created by fangxiao on 15/12/28.
- * <p/>
- * 收藏
+ * Created by fangxiao on 16/1/25.
  */
-public class CollectFragment extends BaseFragment {
+public class FollowChildFragment extends BaseFragment {
 
-    @Bind(R.id.collect_content)
-    LinearLayout collect_content;
+    @Bind(R.id.follow_child_content)
+    LinearLayout follow_child_content;
+
 
     @Override
     protected void initViewsAndEvents() {
-
-        showEmpty(getResources().getString(R.string.drawer_collect_empty), new View.OnClickListener() {
+        showEmpty(getResources().getString(R.string.drawer_follow_empty), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
-        }, R.drawable.img_empty_collection);
+        }, R.drawable.img_empty_follow);
 
     }
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.collect_layout;
+        return R.layout.follow_child_layout;
     }
 
     @Override
@@ -51,7 +49,7 @@ public class CollectFragment extends BaseFragment {
 
     @Override
     protected View getLoadingTargetView() {
-        return collect_content;
+        return follow_child_content;
     }
 
     @Override
