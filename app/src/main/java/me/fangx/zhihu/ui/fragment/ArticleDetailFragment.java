@@ -1,15 +1,19 @@
 package me.fangx.zhihu.ui.fragment;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,12 +35,13 @@ import me.fangx.zhihu.utils.DummyContent;
  */
 public class ArticleDetailFragment extends BaseFragment {
 
+    private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
+    private static final int ALPHA_ANIMATIONS_DURATION = 200;
     public static final String ARG_ITEM_INFO = "item_info";
-
     private ArticleListBean articleListBean;
 
-    @Bind(R.id.quote)
-    TextView quote;
+    @Bind(R.id.appbar)
+    AppBarLayout appbar;
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -76,10 +81,20 @@ public class ArticleDetailFragment extends BaseFragment {
         if (articleListBean != null) {
             loadBackdrop();
             collapsingToolbar.setTitle(articleListBean.getTitle());
-            author.setText(getActivity().getResources().getString(R.string.article_author));
-            quote.setText(getActivity().getResources().getString(R.string.user_desc));
-            tv_content.setText(articleListBean.getTitle());
+            author.setText(articleListBean.getAuthor().getName());
+            tv_content.setText(articleListBean.getContent());
         }
+
+        // AppBar的监听
+        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                int maxScroll = appBarLayout.getTotalScrollRange();
+                float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
+                toolbar.setBackgroundColor(Color.argb((int) (percentage * 255), 19, 121, 214));
+            }
+        });
+
 
     }
 
@@ -115,8 +130,8 @@ public class ArticleDetailFragment extends BaseFragment {
     }
 
     private void loadBackdrop() {
-        if (articleListBean.getImages() != null && articleListBean.getImages().length > 0) {
-            backdropImg.setImageURI(Uri.parse(articleListBean.getImages()[0]));
+        if (!TextUtils.isEmpty(articleListBean.getTitleImage())) {
+            backdropImg.setImageURI(Uri.parse(articleListBean.getTitleImage()));
         }
     }
 

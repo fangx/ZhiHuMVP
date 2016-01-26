@@ -8,46 +8,49 @@ import android.os.Parcelable;
  */
 public class ArticleListBean implements Parcelable {
 
-    private String[] images;
+    private String publishedTime;
 
-    private int type;
-
-    private int id;
-
-    private int ga_prefix;
+    private Author author;
 
     private String title;
 
-    public String[] getImages() {
-        return images;
+    private String titleImage;
+
+    private String summary;
+
+    private String content;
+
+    private String url;
+
+    private String href;
+
+    private int commentsCount;
+
+    private int likesCount;
+
+
+    public int getLikesCount() {
+        return likesCount;
     }
 
-    public void setImages(String[] images) {
-        this.images = images;
+    public void setLikesCount(int likesCount) {
+        this.likesCount = likesCount;
     }
 
-    public int getType() {
-        return type;
+    public String getPublishedTime() {
+        return publishedTime;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setPublishedTime(String publishedTime) {
+        this.publishedTime = publishedTime;
     }
 
-    public int getId() {
-        return id;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getGa_prefix() {
-        return ga_prefix;
-    }
-
-    public void setGa_prefix(int ga_prefix) {
-        this.ga_prefix = ga_prefix;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public String getTitle() {
@@ -58,6 +61,54 @@ public class ArticleListBean implements Parcelable {
         this.title = title;
     }
 
+    public String getTitleImage() {
+        return titleImage;
+    }
+
+    public void setTitleImage(String titleImage) {
+        this.titleImage = titleImage;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getHref() {
+        return href;
+    }
+
+    public void setHref(String href) {
+        this.href = href;
+    }
+
+    public int getCommentsCount() {
+        return commentsCount;
+    }
+
+    public void setCommentsCount(int commentsCount) {
+        this.commentsCount = commentsCount;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -65,22 +116,32 @@ public class ArticleListBean implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringArray(this.images);
-        dest.writeInt(this.type);
-        dest.writeInt(this.id);
-        dest.writeInt(this.ga_prefix);
+        dest.writeString(this.publishedTime);
+        dest.writeParcelable(this.author, 0);
         dest.writeString(this.title);
+        dest.writeString(this.titleImage);
+        dest.writeString(this.summary);
+        dest.writeString(this.content);
+        dest.writeString(this.url);
+        dest.writeString(this.href);
+        dest.writeInt(this.commentsCount);
+        dest.writeInt(this.likesCount);
     }
 
     public ArticleListBean() {
     }
 
     protected ArticleListBean(Parcel in) {
-        this.images = in.createStringArray();
-        this.type = in.readInt();
-        this.id = in.readInt();
-        this.ga_prefix = in.readInt();
+        this.publishedTime = in.readString();
+        this.author = in.readParcelable(Author.class.getClassLoader());
         this.title = in.readString();
+        this.titleImage = in.readString();
+        this.summary = in.readString();
+        this.content = in.readString();
+        this.url = in.readString();
+        this.href = in.readString();
+        this.commentsCount = in.readInt();
+        this.likesCount = in.readInt();
     }
 
     public static final Parcelable.Creator<ArticleListBean> CREATOR = new Parcelable.Creator<ArticleListBean>() {

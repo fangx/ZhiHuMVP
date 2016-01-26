@@ -23,6 +23,10 @@ import rx.schedulers.Schedulers;
  */
 public class HomePresenter extends BasePresenter<HomeListView> {
 
+    private static final String tag = "growthhacker";
+
+    public static final int LIMIT = 10;
+
     private HomeListService homeListService;
     private Subscription mSubscription;
 
@@ -47,10 +51,12 @@ public class HomePresenter extends BasePresenter<HomeListView> {
 
         String date = BaseUtil.getNYYMMDD(1 - page);
 
-        mSubscription = homeListService.getHomeArticleList(date)
+        int offset = (page - 1) * LIMIT;
+
+        mSubscription = homeListService.getHomeArticleList(tag, LIMIT, offset)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<ArticleListEntity>() {
+                .subscribe(new Observer<List<ArticleListBean>>() {
                     @Override
                     public void onCompleted() {
 
@@ -67,15 +73,15 @@ public class HomePresenter extends BasePresenter<HomeListView> {
                     }
 
                     @Override
-                    public void onNext(ArticleListEntity articleListEntity) {
-
+                    public void onNext(List<ArticleListBean> articleListBeanList) {
+                        for (ArticleListBean articleListBean : articleListBeanList) {
+                            articleListBean.setSummary(BaseUtil.delHTMLTag(articleListBean.getSummary()));
+                            articleListBean.setContent(BaseUtil.delHTMLTag(articleListBean.getContent()));
+                        }
                         if (page == 1) {
-                            getMvpView().refresh(articleListEntity);
+                            getMvpView().refresh(articleListBeanList);
                         } else {
-                            if (page >= 5) {
-                                articleListEntity.stories = new ArrayList<ArticleListBean>();
-                            }
-                            getMvpView().loadMore(articleListEntity);
+                            getMvpView().loadMore(articleListBeanList);
                         }
                     }
                 });

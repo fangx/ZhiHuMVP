@@ -15,6 +15,7 @@ import me.fangx.zhihu.R;
 import me.fangx.zhihu.modle.bean.ArticleListBean;
 import me.fangx.zhihu.ui.activity.ArticleDetailActivity;
 import me.fangx.zhihu.ui.fragment.ArticleDetailFragment;
+import me.fangx.zhihu.utils.BaseUtil;
 import me.fangx.zhihu.utils.DummyContent;
 
 public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
@@ -39,25 +40,23 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-        viewHolder.tag_text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ArticleDetailActivity.class);
-                intent.putExtra(ArticleDetailFragment.ARG_ITEM_INFO, datas.get(position));
-                context.startActivity(intent);
-            }
-        });
-
-        viewHolder.title_text.setText(datas.get(position).getTitle());
-
-        viewHolder.title_text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ArticleDetailActivity.class);
-                intent.putExtra(ArticleDetailFragment.ARG_ITEM_INFO, datas.get(position));
-                context.startActivity(intent);
-            }
-        });
+//        viewHolder.tag_text.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, ArticleDetailActivity.class);
+//                intent.putExtra(ArticleDetailFragment.ARG_ITEM_INFO, datas.get(position));
+//                context.startActivity(intent);
+//            }
+//        });
+//
+//        viewHolder.title_text.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, ArticleDetailActivity.class);
+//                intent.putExtra(ArticleDetailFragment.ARG_ITEM_INFO, datas.get(position));
+//                context.startActivity(intent);
+//            }
+//        });
         viewHolder.content_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +65,12 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 context.startActivity(intent);
             }
         });
+
+        ArticleListBean articleListBean = datas.get(position);
+        viewHolder.title_text.setText(articleListBean.getTitle());
+        viewHolder.tv_summary.setText(articleListBean.getSummary());
+        viewHolder.tv_likecount.setText(articleListBean.getLikesCount() > 1000 ? (float) (articleListBean.getLikesCount() / 1000) * 10 / 10 + "k" : articleListBean.getLikesCount() + "");
+
     }
 
     //获取数据的数量
@@ -76,14 +81,16 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
 
     //自定义的ViewHolder，持有每个Item的的所有界面元素
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView mTextView;
+        public TextView tv_summary;
+        public TextView tv_likecount;
         public TextView tag_text;
         public TextView title_text;
         public LinearLayout content_layout;
 
         public ViewHolder(View view) {
             super(view);
-            mTextView = (TextView) view.findViewById(R.id.text);
+            tv_summary = (TextView) view.findViewById(R.id.tv_summary);
+            tv_likecount = (TextView) view.findViewById(R.id.tv_likecount);
             tag_text = (TextView) view.findViewById(R.id.tag_text);
             title_text = (TextView) view.findViewById(R.id.title_text);
             content_layout = (LinearLayout) view.findViewById(R.id.content_layout);

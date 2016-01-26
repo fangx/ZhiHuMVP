@@ -18,7 +18,7 @@ public class RetrofitUtils {
             synchronized (RetrofitUtils.class) {
                 if (singleton == null) {
                     Retrofit.Builder builder = new Retrofit.Builder();
-                    builder.baseUrl("http://news.at.zhihu.com/")
+                    builder.baseUrl("http://zhuanlan.zhihu.com/")
                             .addConverterFactory(GsonConverterFactory.create())//设置远程地址
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
                     singleton = builder.build();

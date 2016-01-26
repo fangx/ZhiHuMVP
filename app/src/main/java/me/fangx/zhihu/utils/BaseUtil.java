@@ -8,6 +8,8 @@ import android.util.DisplayMetrics;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import me.fangx.zhihu.R;
 
@@ -17,6 +19,7 @@ import me.fangx.zhihu.R;
 public class BaseUtil {
     //一天的秒数
     public static final long ONE_DAY_TIME = 24 * 60 * 60;
+
     /**
      * 获取屏幕分辨率
      *
@@ -60,7 +63,6 @@ public class BaseUtil {
     }
 
 
-
     /**
      * 获取年月日时间
      */
@@ -92,4 +94,27 @@ public class BaseUtil {
         share.putExtra(Intent.EXTRA_TEXT, questionTitle + " " + questionUrl + " 分享自知乎网");
         context.startActivity(Intent.createChooser(share, context.getString(R.string.share_to)));
     }
+
+
+    //替换html标签
+    public static String delHTMLTag(String htmlStr) {
+        String regEx_script = "<script[^>]*?>[\\s\\S]*?<\\/script>"; //定义script的正则表达式
+        String regEx_style = "<style[^>]*?>[\\s\\S]*?<\\/style>"; //定义style的正则表达式
+        String regEx_html = "<[^>]+>"; //定义HTML标签的正则表达式
+
+        Pattern p_script = Pattern.compile(regEx_script, Pattern.CASE_INSENSITIVE);
+        Matcher m_script = p_script.matcher(htmlStr);
+        htmlStr = m_script.replaceAll(""); //过滤script标签
+
+        Pattern p_style = Pattern.compile(regEx_style, Pattern.CASE_INSENSITIVE);
+        Matcher m_style = p_style.matcher(htmlStr);
+        htmlStr = m_style.replaceAll(""); //过滤style标签
+
+        Pattern p_html = Pattern.compile(regEx_html, Pattern.CASE_INSENSITIVE);
+        Matcher m_html = p_html.matcher(htmlStr);
+        htmlStr = m_html.replaceAll(""); //过滤html标签
+
+        return htmlStr.trim(); //返回文本字符串
+    }
+
 }

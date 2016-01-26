@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import me.fangx.common.util.eventbus.EventCenter;
@@ -92,23 +93,23 @@ public class HomeListFragment extends BaseFragment implements HomeListView {
 
 
     @Override
-    public void refresh(ArticleListEntity data) {
+    public void refresh(List<ArticleListBean> data) {
         //注意此处
         hao_recycleview.refreshComplete();
         hao_recycleview.loadMoreComplete();
         swiperefresh.setRefreshing(false);
         listData.clear();
-        listData.addAll(data.stories);
+        listData.addAll(data);
         homeListAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void loadMore(ArticleListEntity data) {
+    public void loadMore(List<ArticleListBean> data) {
 
-        if (BaseUtil.isEmpty(data.stories)) {
+        if (BaseUtil.isEmpty(data)) {
             hao_recycleview.loadMoreEnd();
         } else {
-            listData.addAll(data.stories);
+            listData.addAll(data);
             homeListAdapter.notifyDataSetChanged();
             hao_recycleview.loadMoreComplete();
         }

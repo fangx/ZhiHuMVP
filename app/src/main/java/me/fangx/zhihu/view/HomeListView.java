@@ -1,5 +1,8 @@
 package me.fangx.zhihu.view;
 
+import java.util.List;
+
+import me.fangx.zhihu.modle.bean.ArticleListBean;
 import me.fangx.zhihu.modle.entity.ArticleListEntity;
 
 /**
@@ -7,8 +10,8 @@ import me.fangx.zhihu.modle.entity.ArticleListEntity;
  */
 public interface HomeListView extends MvpView {
 
-    void refresh(ArticleListEntity data);
+    void refresh(List<ArticleListBean> data);
 
-    void loadMore(ArticleListEntity data);
+    void loadMore(List<ArticleListBean> data);
 
 }
