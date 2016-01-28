@@ -29,10 +29,26 @@ public class ExploreFragment extends BaseFragment {
     @Override
     protected void initViewsAndEvents() {
         explore_pager.setOffscreenPageLimit(ExplorePagerAdapter.PAGE_COUNT);
-        ExplorePagerAdapter adapter = new ExplorePagerAdapter(getSupportFragmentManager());
+        final ExplorePagerAdapter adapter = new ExplorePagerAdapter(getSupportFragmentManager());
         explore_pager.setAdapter(adapter);
         explore_pager_tabs.setupWithViewPager(explore_pager);
-//        explore_pager_tabs.setTabMode(TabLayout.MODE_FIXED);
+        explore_pager_tabs.setTabMode(TabLayout.MODE_FIXED);
+        explore_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                adapter.setFBGone(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                adapter.setFBGone(-1);
+            }
+        });
     }
 
     @Override

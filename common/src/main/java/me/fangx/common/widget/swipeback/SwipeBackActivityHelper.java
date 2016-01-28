@@ -22,7 +22,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.nineoldandroids.view.ViewHelper;
+
 import me.fangx.common.R;
+import me.fangx.common.util.DensityUtils;
 
 
 /**
@@ -43,9 +46,11 @@ public class SwipeBackActivityHelper {
         mActivity.getWindow().getDecorView().setBackgroundDrawable(null);
         mSwipeBackLayout = (SwipeBackLayout) LayoutInflater.from(mActivity).inflate(
                 R.layout.swipeback_layout, null);
+        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
         mSwipeBackLayout.addSwipeListener(new SwipeBackLayout.SwipeListener() {
             @Override
             public void onScrollStateChange(int state, float scrollPercent) {
+//                ViewHelper.setTranslationX(mActivity.getWindow().getDecorView(), (1 - scrollPercent) * DensityUtils.getDisplayWidth(mActivity));
             }
 
             @Override

@@ -27,10 +27,10 @@
 
         <activity
             android:name=".ui.activity.ArticleDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.MyActivity"
+            android:theme="@style/NewAppTheme"></activity>
 
 
     </application>

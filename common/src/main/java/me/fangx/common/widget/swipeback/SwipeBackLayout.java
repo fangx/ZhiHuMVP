@@ -47,6 +47,11 @@ public class SwipeBackLayout extends FrameLayout {
     /**
      * Edge flag indicating that the left edge should be affected.
      */
+    public static final int EDGE_TOP = ViewDragHelper.EDGE_TOP;
+
+    /**
+     * Edge flag indicating that the left edge should be affected.
+     */
     public static final int EDGE_LEFT = ViewDragHelper.EDGE_LEFT;
 
     /**
@@ -62,7 +67,7 @@ public class SwipeBackLayout extends FrameLayout {
     /**
      * Edge flag set indicating all edges should be affected.
      */
-    public static final int EDGE_ALL = EDGE_LEFT | EDGE_RIGHT | EDGE_BOTTOM;
+    public static final int EDGE_ALL = EDGE_TOP | EDGE_LEFT | EDGE_RIGHT | EDGE_BOTTOM;
 
     /**
      * A view is not currently being dragged or animating as a result of a
@@ -90,7 +95,7 @@ public class SwipeBackLayout extends FrameLayout {
     private static final int OVERSCROLL_DISTANCE = 10;
 
     private static final int[] EDGE_FLAGS = {
-            EDGE_LEFT, EDGE_RIGHT, EDGE_BOTTOM, EDGE_ALL
+            EDGE_LEFT, EDGE_TOP, EDGE_RIGHT, EDGE_BOTTOM, EDGE_ALL
     };
 
     private int mEdgeFlag;
@@ -317,6 +322,9 @@ public class SwipeBackLayout extends FrameLayout {
         } else if ((mEdgeFlag & EDGE_BOTTOM) != 0) {
             top = -childHeight - OVERSCROLL_DISTANCE;
             mTrackingEdge = EDGE_BOTTOM;
+        } else if ((mEdgeFlag & EDGE_TOP) != 0) {
+            top = OVERSCROLL_DISTANCE;
+            mTrackingEdge = EDGE_TOP;
         }
 
         mDragHelper.smoothSlideViewTo(mContentView, left, top);
@@ -386,6 +394,8 @@ public class SwipeBackLayout extends FrameLayout {
             canvas.clipRect(child.getRight(), 0, getRight(), getHeight());
         } else if ((mTrackingEdge & EDGE_BOTTOM) != 0) {
             canvas.clipRect(child.getLeft(), child.getBottom(), getRight(), getHeight());
+        } else if ((mTrackingEdge & EDGE_TOP) != 0) {
+            canvas.clipRect(0, child.getTop(), 0, getHeight());
         }
         canvas.drawColor(color);
     }
@@ -428,6 +438,8 @@ public class SwipeBackLayout extends FrameLayout {
                     mTrackingEdge = EDGE_RIGHT;
                 } else if (mDragHelper.isEdgeTouched(EDGE_BOTTOM, i)) {
                     mTrackingEdge = EDGE_BOTTOM;
+                } else if (mDragHelper.isEdgeTouched(EDGE_TOP, i)) {
+                    mTrackingEdge = EDGE_TOP;
                 }
                 if (mListeners != null && !mListeners.isEmpty()) {
                     for (SwipeListener listener : mListeners) {
@@ -446,7 +458,7 @@ public class SwipeBackLayout extends FrameLayout {
 
         @Override
         public int getViewVerticalDragRange(View child) {
-            return mEdgeFlag & EDGE_BOTTOM;
+            return mEdgeFlag & (EDGE_BOTTOM | EDGE_TOP);
         }
 
         @Override
@@ -459,6 +471,9 @@ public class SwipeBackLayout extends FrameLayout {
                 mScrollPercent = Math.abs((float) left
                         / (mContentView.getWidth()));
             } else if ((mTrackingEdge & EDGE_BOTTOM) != 0) {
+                mScrollPercent = Math.abs((float) top
+                        / (mContentView.getHeight()));
+            } else if ((mTrackingEdge & EDGE_TOP) != 0) {
                 mScrollPercent = Math.abs((float) top
                         / (mContentView.getHeight()));
             }
@@ -498,6 +513,9 @@ public class SwipeBackLayout extends FrameLayout {
             } else if ((mTrackingEdge & EDGE_BOTTOM) != 0) {
                 top = yvel < 0 || yvel == 0 && mScrollPercent > mScrollThreshold ? -(childHeight
                         + OVERSCROLL_DISTANCE) : 0;
+            } else if ((mTrackingEdge & EDGE_TOP) != 0) {
+                top = yvel < 0 || yvel == 0 && mScrollPercent > mScrollThreshold ? childHeight
+                        + OVERSCROLL_DISTANCE : 0;
             }
 
             mDragHelper.settleCapturedViewAt(left, top);
@@ -520,6 +538,8 @@ public class SwipeBackLayout extends FrameLayout {
             int ret = 0;
             if ((mTrackingEdge & EDGE_BOTTOM) != 0) {
                 ret = Math.min(0, Math.max(top, -child.getHeight()));
+            } else if ((mTrackingEdge & EDGE_TOP) != 0) {
+                ret = Math.min(child.getHeight(), Math.max(top, 0));
             }
             return ret;
         }

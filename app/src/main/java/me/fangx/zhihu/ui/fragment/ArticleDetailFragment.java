@@ -35,8 +35,6 @@ import me.fangx.zhihu.utils.DummyContent;
  */
 public class ArticleDetailFragment extends BaseFragment {
 
-    private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
-    private static final int ALPHA_ANIMATIONS_DURATION = 200;
     public static final String ARG_ITEM_INFO = "item_info";
     private ArticleListBean articleListBean;
 

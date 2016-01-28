@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/explore_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/explore_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/explore_pager_tabs"
-            style="@style/tabLayoutStyle"/>
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/explore_pager"
-        style="@style/pagerStyle"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".ui.activity.MainActivity" />
-</LinearLayout>
+            <android.support.design.widget.TabLayout
+                android:id="@+id/explore_pager_tabs"
+                style="@style/tabLayoutStyle" />
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/explore_pager"
+            style="@style/pagerStyle"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context=".ui.activity.MainActivity" />
+    </LinearLayout>
+</FrameLayout>

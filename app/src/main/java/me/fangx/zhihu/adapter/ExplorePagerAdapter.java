@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.view.View;
 
 import me.fangx.zhihu.ui.fragment.ExploreChildFragment;
 
@@ -12,9 +13,9 @@ import me.fangx.zhihu.ui.fragment.ExploreChildFragment;
  */
 public class ExplorePagerAdapter extends FragmentStatePagerAdapter {
 
-    public static final int PAGE_COUNT = 4;
+    public static final int PAGE_COUNT = 3;
 
-    public static final String[] EX_TITLES = {"热门推荐", "热门收藏", "本月热榜", "今日推荐"};
+    public static final String[] EX_TITLES = {"推荐", "热门", "收藏"};
 
     public static final String EXPLORE_TAG = "explore_tag";
 
@@ -40,4 +41,16 @@ public class ExplorePagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         return EX_TITLES[position];
     }
+
+
+    public void setFBGone(int position){
+        for(int i = 0 ; i < PAGE_COUNT ; i ++){
+            if(i != position){
+                ((ExploreChildFragment)getItem(i)).setFAButGone(View.GONE);
+            }else{
+                ((ExploreChildFragment)getItem(i)).setFAButGone(View.VISIBLE);
+            }
+        }
+    }
+
 }

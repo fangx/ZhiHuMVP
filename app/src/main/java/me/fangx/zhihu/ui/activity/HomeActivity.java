@@ -9,22 +9,24 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.DraweeView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import me.fangx.common.ui.activity.BaseAppCompatActivity;
 import me.fangx.common.util.eventbus.EventCenter;
 import me.fangx.common.util.log.LogUtil;
@@ -84,32 +86,25 @@ public class HomeActivity extends BaseAppCompatActivity {
         setUpDrawer();
     }
 
+    @OnClick({R.id.user_img, R.id.tv_setting, R.id.tv_change_theme})
+    public void viewClick(View v) {
+        switch (v.getId()) {
+            case R.id.user_img:
+                closeDrawer();
+                readyGo(MyActivity.class);
+                break;
+            case R.id.tv_setting:
+
+                break;
+            case R.id.tv_change_theme:
+                changeTheme(home_layout);
+                break;
+        }
+    }
 
     private void init() {
         nightModeHelper = new NightModeHelper(this);
         user_img.setImageURI(Uri.parse("http://fxblog.oss-cn-beijing.aliyuncs.com/avatar_img.png"));
-
-        nv_drawer_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        tv_change_theme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeTheme(home_layout);
-            }
-        });
-
-        tv_setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
     }
 
     private void setupToolbar() {
@@ -300,56 +295,16 @@ public class HomeActivity extends BaseAppCompatActivity {
      * @param view
      */
     private void changeTheme(final View view) {
-
         nightModeHelper.toggle();
-
-//        //我们先取这个根布局的 bitmap缓存 这个实际上跟截屏是差不多的一个东西。
-//        view.setDrawingCacheEnabled(true);
-//        view.buildDrawingCache(true);
-//        final Bitmap localBitmap = Bitmap.createBitmap(view.getDrawingCache());
-//        view.setDrawingCacheEnabled(false);
-//
-//        mengban_view.setVisibility(View.VISIBLE);
-////        //我们new出来的这个蒙版view --mengbanview 就把他放到跟布局view里面 并且让他充满 同时这个view的background就是截屏前我们的那个截图bitmap
-////        final View mengbanView = new View(getApplicationContext());
-////        mengbanView.setBackgroundDrawable(new BitmapDrawable(getResources(), localBitmap));
-////        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-////        ((FrameLayout) view).addView(mengbanView, params);
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//            mengban_view.setBackground(new BitmapDrawable(getResources(), localBitmap));
-//        } else {
-//            mengban_view.setBackgroundDrawable(new BitmapDrawable(getResources(), localBitmap));
-//        }
-//
-//        mengban_view.animate().alpha(0).setDuration(400).setListener(new Animator.AnimatorListener() {
-//            @Override
-//            public void onAnimationStart(Animator animator) {
-//                nightModeHelper.toggle();
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animator animator) {
-//                mengban_view.setVisibility(View.GONE);
-//                localBitmap.recycle();
-//            }
-//
-//            @Override
-//            public void onAnimationCancel(Animator animator) {
-//
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animator animator) {
-//
-//            }
-//        }).start();
-
-
     }
 
     @Override
     public void onBackPressed() {
+
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            closeDrawer();
+            return;
+        }
 
         if (position != 0) {
             selectItem(0, mNavDrawerItems.get(0).getTitle());
