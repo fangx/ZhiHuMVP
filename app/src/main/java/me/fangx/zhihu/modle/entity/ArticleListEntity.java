@@ -9,8 +9,6 @@ import me.fangx.zhihu.modle.bean.ArticleListBean;
  */
 public class ArticleListEntity extends BaseEntity {
 
-    private String date;
-
-    public List<ArticleListBean> stories;
+    public List<ArticleListBean> data;
 
 }

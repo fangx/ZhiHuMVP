@@ -2,8 +2,11 @@ package me.fangx.zhihu.ui.fragment;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +21,9 @@ import me.fangx.zhihu.adapter.HomeListAdapter;
 import me.fangx.zhihu.modle.bean.ArticleListBean;
 import me.fangx.zhihu.modle.entity.ArticleListEntity;
 import me.fangx.zhihu.presenter.HomePresenter;
+import me.fangx.zhihu.utils.ACache;
 import me.fangx.zhihu.utils.BaseUtil;
+import me.fangx.zhihu.utils.GsonUtil;
 import me.fangx.zhihu.view.HomeListView;
 
 /**
@@ -46,6 +51,14 @@ public class HomeListFragment extends BaseFragment implements HomeListView {
     @Override
     protected void initViewsAndEvents() {
 
+        ACache mCache = ACache.get(this.getActivity().getApplicationContext());
+        String value = mCache.getAsString("home_list");
+        if (!TextUtils.isEmpty(value)) {
+            ArticleListEntity articleListEntity = GsonUtil.fromJson(value, ArticleListEntity.class);
+            if(articleListEntity != null){
+                listData.addAll(articleListEntity.data);
+            }
+        }
         homeListAdapter = new HomeListAdapter(mContext, listData);
         hao_recycleview.setAdapter(homeListAdapter);
 
@@ -101,6 +114,12 @@ public class HomeListFragment extends BaseFragment implements HomeListView {
         listData.clear();
         listData.addAll(data);
         homeListAdapter.notifyDataSetChanged();
+
+        ACache aCache = ACache.get(this.getActivity().getApplicationContext());
+        ArticleListEntity articleListEntity = new ArticleListEntity();
+        articleListEntity.data = data;
+        aCache.put("home_list", GsonUtil.toJson(articleListEntity));
+
     }
 
     @Override
