@@ -12,10 +12,12 @@ import me.fangx.zhihu.modle.bean.ArticleListBean;
 import me.fangx.zhihu.modle.entity.ArticleListEntity;
 import me.fangx.zhihu.utils.BaseUtil;
 import me.fangx.zhihu.view.HomeListView;
+import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -53,9 +55,21 @@ public class HomePresenter extends BasePresenter<HomeListView> {
 
         int offset = (page - 1) * LIMIT;
 
+
         mSubscription = homeListService.getHomeArticleList(tag, LIMIT, offset)
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(new Func1<List<ArticleListBean>, List<ArticleListBean>>() {
+                    @Override
+                    public List<ArticleListBean> call(List<ArticleListBean> articleListBeanList) {
+                        for (ArticleListBean articleListBean : articleListBeanList) {
+                            articleListBean.setSummary(BaseUtil.delHTMLTag(articleListBean.getSummary()));
+                            articleListBean.setContent(BaseUtil.delHTMLTag(articleListBean.getContent()));
+                        }
+                        return articleListBeanList;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<ArticleListBean>>() {
                     @Override
                     public void onCompleted() {
@@ -74,10 +88,6 @@ public class HomePresenter extends BasePresenter<HomeListView> {
 
                     @Override
                     public void onNext(List<ArticleListBean> articleListBeanList) {
-                        for (ArticleListBean articleListBean : articleListBeanList) {
-                            articleListBean.setSummary(BaseUtil.delHTMLTag(articleListBean.getSummary()));
-                            articleListBean.setContent(BaseUtil.delHTMLTag(articleListBean.getContent()));
-                        }
                         if (page == 1) {
                             getMvpView().refresh(articleListBeanList);
                         } else {

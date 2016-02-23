@@ -3,6 +3,7 @@ package me.fangx.zhihu.ui.activity;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -31,6 +32,7 @@ import me.fangx.common.ui.activity.BaseAppCompatActivity;
 import me.fangx.common.util.eventbus.EventCenter;
 import me.fangx.common.util.log.LogUtil;
 import me.fangx.common.util.netstatus.NetUtils;
+import me.fangx.zhihu.BuildConfig;
 import me.fangx.zhihu.R;
 import me.fangx.zhihu.adapter.NavDrawerListAdapter;
 import me.fangx.zhihu.modle.bean.NavDrawerItem;
@@ -81,6 +83,10 @@ public class HomeActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initViewsAndEvents() {
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
+        }
         init();
         setupToolbar();
         setUpDrawer();
