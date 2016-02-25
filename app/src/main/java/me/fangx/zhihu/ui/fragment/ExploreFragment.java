@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import butterknife.Bind;
 import me.fangx.common.ui.fragment.BaseLazyFragment;
 import me.fangx.common.util.eventbus.EventCenter;
@@ -25,11 +27,12 @@ public class ExploreFragment extends BaseFragment {
     TabLayout explore_pager_tabs;
     @Bind(R.id.explore_pager)
     ViewPager explore_pager;
-
+    @Bind(R.id.explore_fab)
+    FloatingActionButton explore_fab;
     @Override
     protected void initViewsAndEvents() {
         explore_pager.setOffscreenPageLimit(ExplorePagerAdapter.PAGE_COUNT);
-        final ExplorePagerAdapter adapter = new ExplorePagerAdapter(getSupportFragmentManager());
+        final ExplorePagerAdapter adapter = new ExplorePagerAdapter(getSupportFragmentManager(),explore_fab);
         explore_pager.setAdapter(adapter);
         explore_pager_tabs.setupWithViewPager(explore_pager);
         explore_pager_tabs.setTabMode(TabLayout.MODE_FIXED);
@@ -41,12 +44,16 @@ public class ExploreFragment extends BaseFragment {
 
             @Override
             public void onPageSelected(int position) {
-                adapter.setFBGone(position);
+                explore_fab.show();
+//                ExploreChildFragment exploreChildFragment =  adapter.getFB(position);
+//                if(exploreChildFragment != null && exploreChildFragment.getExplore_recycleview() != null){
+//                    explore_fab.attachToRecyclerView(exploreChildFragment.getExplore_recycleview());
+//                }
+
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                adapter.setFBGone(-1);
             }
         });
     }

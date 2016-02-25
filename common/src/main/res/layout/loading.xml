@@ -24,7 +24,7 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.github.obsessive.library.progress.CircularProgressBar
+    <me.fangx.common.widget.progress.CircularProgressBar
         android:id="@+id/loading_progress"
         android:layout_width="@dimen/common_loading_progress_size"
         android:layout_height="@dimen/common_loading_progress_size"

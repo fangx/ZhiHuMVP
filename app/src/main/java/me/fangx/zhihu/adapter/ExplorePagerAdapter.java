@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.View;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import me.fangx.zhihu.ui.fragment.ExploreChildFragment;
 
 /**
@@ -19,14 +21,17 @@ public class ExplorePagerAdapter extends FragmentStatePagerAdapter {
 
     public static final String EXPLORE_TAG = "explore_tag";
 
-    public ExplorePagerAdapter(FragmentManager fm) {
+    private FloatingActionButton explore_fab;
+
+    public ExplorePagerAdapter(FragmentManager fm ,FloatingActionButton explore_fab) {
         super(fm);
+        this.explore_fab = explore_fab;
     }
 
     @Override
     public Fragment getItem(int i) {
         Bundle bundle = new Bundle();
-        Fragment newFragment = new ExploreChildFragment();
+        ExploreChildFragment newFragment = new ExploreChildFragment(explore_fab);
         bundle.putString(EXPLORE_TAG, EX_TITLES[i]);
         newFragment.setArguments(bundle);
         return newFragment;
@@ -43,13 +48,11 @@ public class ExplorePagerAdapter extends FragmentStatePagerAdapter {
     }
 
 
-    public void setFBGone(int position){
-        for(int i = 0 ; i < PAGE_COUNT ; i ++){
-            if(i != position){
-                ((ExploreChildFragment)getItem(i)).setFAButGone(View.GONE);
-            }else{
-                ((ExploreChildFragment)getItem(i)).setFAButGone(View.VISIBLE);
-            }
+    public ExploreChildFragment getFB(int position) {
+        if (getItem(position) != null) {
+            return (ExploreChildFragment) getItem(position);
+        } else {
+            return null;
         }
     }
 

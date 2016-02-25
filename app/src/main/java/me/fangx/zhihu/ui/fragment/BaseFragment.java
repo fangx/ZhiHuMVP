@@ -17,12 +17,12 @@ public abstract class BaseFragment extends BaseLazyFragment implements MvpView {
 
     @Override
     public void showLoading(String msg) {
-
+          toggleShowLoading(true,msg);
     }
 
     @Override
     public void hideLoading() {
-
+        toggleShowLoading(false,"");
     }
 
     @Override

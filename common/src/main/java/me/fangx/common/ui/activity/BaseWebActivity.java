@@ -68,13 +68,14 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
         setSystemBarTintDrawable(getResources().getDrawable(R.drawable.sr_primary));
 
         mToolBar = ButterKnife.findById(this, R.id.common_toolbar);
+        mToolBar.setVisibility(View.GONE);
         mBrowserLayout = ButterKnife.findById(this, R.id.common_web_browser_layout);
 
-        if (null != mToolBar) {
-            setSupportActionBar(mToolBar);
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+//        if (null != mToolBar) {
+//            setSupportActionBar(mToolBar);
+//            getSupportActionBar().setHomeButtonEnabled(true);
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        }
 
         if (!CommonUtils.isEmpty(mWebTitle)) {
             setTitle(mWebTitle);
@@ -122,6 +123,6 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
 
     @Override
     protected TransitionMode getOverridePendingTransitionMode() {
-        return TransitionMode.RIGHT;
+        return TransitionMode.FADE;
     }
 }

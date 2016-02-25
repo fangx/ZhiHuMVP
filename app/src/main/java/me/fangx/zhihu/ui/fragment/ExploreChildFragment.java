@@ -34,8 +34,7 @@ public class ExploreChildFragment extends BaseFragment implements ExploreListVie
     SwipeRefreshLayout explore_swiperefresh;
     @Bind(R.id.explore_recycleview)
     HaoRecyclerView explore_recycleview;
-    @Bind(R.id.explore_fab)
-    FloatingActionButton explore_fab;
+
 
 
     //页面标识
@@ -45,6 +44,11 @@ public class ExploreChildFragment extends BaseFragment implements ExploreListVie
     private ExploreListAdapter exploreListAdapter;
     private ArrayList<ArticleListBean> listData = new ArrayList<>();
     private int page = 1;
+    private FloatingActionButton explore_fab;
+    public ExploreChildFragment(FloatingActionButton explore_fab) {
+        super();
+        this.explore_fab = explore_fab;
+    }
 
 
     @Override
@@ -60,7 +64,6 @@ public class ExploreChildFragment extends BaseFragment implements ExploreListVie
 
         exploreListAdapter = new ExploreListAdapter(mContext, listData);
         explore_recycleview.setAdapter(exploreListAdapter);
-        explore_fab.attachToRecyclerView(explore_recycleview);
         explore_swiperefresh.setColorSchemeResources(R.color.textBlueDark, R.color.textBlueDark, R.color.textBlueDark,
                 R.color.textBlueDark);
 
@@ -75,6 +78,10 @@ public class ExploreChildFragment extends BaseFragment implements ExploreListVie
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         explore_recycleview.setLayoutManager(layoutManager);
+
+        if(explore_fab != null){
+            explore_fab.attachToRecyclerView(explore_recycleview);
+        }
 
         //设置自定义加载中和到底了效果
         ProgressView progressView = new ProgressView(mContext);
@@ -100,7 +107,7 @@ public class ExploreChildFragment extends BaseFragment implements ExploreListVie
         //初次加载
         page = 1;
         explorePresenter.loadList(page);
-
+        showLoading("加载中...");
 
     }
 
@@ -113,6 +120,7 @@ public class ExploreChildFragment extends BaseFragment implements ExploreListVie
     @Override
     public void refresh(List<ArticleListBean> data) {
         //注意此处
+        hideLoading();
         explore_recycleview.refreshComplete();
         explore_recycleview.loadMoreComplete();
         explore_swiperefresh.setRefreshing(false);
@@ -149,7 +157,7 @@ public class ExploreChildFragment extends BaseFragment implements ExploreListVie
 
     @Override
     protected View getLoadingTargetView() {
-        return explore_child_content;
+        return explore_swiperefresh;
     }
 
     @Override
@@ -163,11 +171,9 @@ public class ExploreChildFragment extends BaseFragment implements ExploreListVie
     }
 
 
-    public void setFAButGone(int visible){
-        if(explore_fab != null){
-            explore_fab.setVisibility(visible);
-        }
+    public HaoRecyclerView getExplore_recycleview() {
+        return explore_recycleview;
+    }
 
-    };
 
 }

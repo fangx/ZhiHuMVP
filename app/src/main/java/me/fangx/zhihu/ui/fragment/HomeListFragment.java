@@ -53,12 +53,7 @@ public class HomeListFragment extends BaseFragment implements HomeListView {
 
         ACache mCache = ACache.get(this.getActivity().getApplicationContext());
         String value = mCache.getAsString("home_list");
-        if (!TextUtils.isEmpty(value)) {
-            ArticleListEntity articleListEntity = GsonUtil.fromJson(value, ArticleListEntity.class);
-            if(articleListEntity != null){
-                listData.addAll(articleListEntity.data);
-            }
-        }
+
         homeListAdapter = new HomeListAdapter(mContext, listData);
         hao_recycleview.setAdapter(homeListAdapter);
 
@@ -98,6 +93,14 @@ public class HomeListFragment extends BaseFragment implements HomeListView {
 
         homePresenter = new HomePresenter(mContext);
         homePresenter.attachView(this);
+        if (!TextUtils.isEmpty(value)) {
+            ArticleListEntity articleListEntity = GsonUtil.fromJson(value, ArticleListEntity.class);
+            if(articleListEntity != null){
+                listData.addAll(articleListEntity.data);
+            }
+        }else{
+            showLoading("加载中...");
+        }
         //初次加载
         page = 1;
         homePresenter.loadList(page);
@@ -107,6 +110,7 @@ public class HomeListFragment extends BaseFragment implements HomeListView {
 
     @Override
     public void refresh(List<ArticleListBean> data) {
+        hideLoading();
         //注意此处
         hao_recycleview.refreshComplete();
         hao_recycleview.loadMoreComplete();
