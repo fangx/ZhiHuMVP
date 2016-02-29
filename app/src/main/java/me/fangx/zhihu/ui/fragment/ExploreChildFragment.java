@@ -45,11 +45,14 @@ public class ExploreChildFragment extends BaseFragment implements ExploreListVie
     private ArrayList<ArticleListBean> listData = new ArrayList<>();
     private int page = 1;
     private FloatingActionButton explore_fab;
-    public ExploreChildFragment(FloatingActionButton explore_fab) {
-        super();
-        this.explore_fab = explore_fab;
+
+    public FloatingActionButton getExplore_fab() {
+        return explore_fab;
     }
 
+    public void setExplore_fab(FloatingActionButton explore_fab) {
+        this.explore_fab = explore_fab;
+    }
 
     @Override
     protected void initViewsAndEvents() {

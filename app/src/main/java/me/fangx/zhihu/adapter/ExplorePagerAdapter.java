@@ -31,7 +31,8 @@ public class ExplorePagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int i) {
         Bundle bundle = new Bundle();
-        ExploreChildFragment newFragment = new ExploreChildFragment(explore_fab);
+        ExploreChildFragment newFragment = new ExploreChildFragment();
+        newFragment.setExplore_fab(explore_fab);
         bundle.putString(EXPLORE_TAG, EX_TITLES[i]);
         newFragment.setArguments(bundle);
         return newFragment;
