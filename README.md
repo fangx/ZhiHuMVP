@@ -20,6 +20,10 @@
 - Android Studio
 - Android 4.0 以上
 
+## apk下载
+
+- ![](https://github.com/fangx/ZhiHuMVP/blob/master/img/download.png)
+
 
 ## 致谢
 
