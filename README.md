@@ -1,8 +1,11 @@
 # ZhiHuMVP
 仿知乎客户端
 
-- ![](https://github.com/fangx/ZhiHuMVP/blob/master/zhihu.gif)
+- ![](https://github.com/fangx/ZhiHuMVP/blob/master/zhihu1.gif)
 
+- ![](https://github.com/fangx/ZhiHuMVP/blob/master/zhihu2.gif)
+
+- ![](https://github.com/fangx/ZhiHuMVP/blob/master/zhihu3.gif)
 
 本项目包含以下知识点：
 
