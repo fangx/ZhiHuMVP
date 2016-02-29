@@ -136,11 +136,17 @@ public class NightModeHelper {
 
     public void notNight() {
         updateConfig(Configuration.UI_MODE_NIGHT_NO);
+        System.gc();
+        System.runFinalization(); // added in https://github.com/android/platform_frameworks_base/commit/6f3a38f3afd79ed6dddcef5c83cb442d6749e2ff
+        System.gc();
         mActivity.get().recreate();
     }
 
     public void night() {
         updateConfig(Configuration.UI_MODE_NIGHT_YES);
+        System.gc();
+        System.runFinalization(); // added in https://github.com/android/platform_frameworks_base/commit/6f3a38f3afd79ed6dddcef5c83cb442d6749e2ff
+        System.gc();
         mActivity.get().recreate();
     }
 }

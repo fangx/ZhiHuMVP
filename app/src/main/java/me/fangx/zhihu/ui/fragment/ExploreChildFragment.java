@@ -170,10 +170,4 @@ public class ExploreChildFragment extends BaseFragment implements ExploreListVie
         return false;
     }
 
-
-    public HaoRecyclerView getExplore_recycleview() {
-        return explore_recycleview;
-    }
-
-
 }

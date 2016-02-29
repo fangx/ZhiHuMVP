@@ -99,7 +99,7 @@ public class HomeListFragment extends BaseFragment implements HomeListView {
                 listData.addAll(articleListEntity.data);
             }
         }else{
-            showLoading("加载中...");
+//            showLoading("加载中...");
         }
         //初次加载
         page = 1;
@@ -110,7 +110,7 @@ public class HomeListFragment extends BaseFragment implements HomeListView {
 
     @Override
     public void refresh(List<ArticleListBean> data) {
-        hideLoading();
+//        hideLoading();
         //注意此处
         hao_recycleview.refreshComplete();
         hao_recycleview.loadMoreComplete();

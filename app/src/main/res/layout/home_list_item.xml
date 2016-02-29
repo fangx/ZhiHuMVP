@@ -11,7 +11,6 @@
         android:id="@+id/tag_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/layout_bg"
         android:paddingTop="10dp"
         android:paddingBottom="2dp"
         android:text="热门问答"
@@ -24,7 +23,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="2dp"
         android:paddingBottom="5dp"
-        android:background="@drawable/title_text_bg"
         android:text=""
         android:textColor="@color/title_text_color"
         android:textSize="@dimen/text_size_16" />
@@ -33,7 +31,6 @@
         android:id="@+id/content_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/layout_bg"
         android:paddingBottom="15dp"
         android:paddingTop="5dp">
 

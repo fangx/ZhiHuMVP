@@ -1,17 +1,14 @@
 package me.fangx.zhihu.ui.activity;
 
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,8 +21,6 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -34,7 +29,6 @@ import me.fangx.common.ui.activity.BaseWebActivity;
 import me.fangx.common.util.eventbus.EventCenter;
 import me.fangx.common.util.log.LogUtil;
 import me.fangx.common.util.netstatus.NetUtils;
-import me.fangx.zhihu.BuildConfig;
 import me.fangx.zhihu.R;
 import me.fangx.zhihu.adapter.NavDrawerListAdapter;
 import me.fangx.zhihu.modle.bean.NavDrawerItem;
@@ -85,10 +79,6 @@ public class HomeActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initViewsAndEvents() {
-        if (BuildConfig.DEBUG) {
-            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
-            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
-        }
         init();
         setupToolbar();
         setUpDrawer();

@@ -40,23 +40,23 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-//        viewHolder.tag_text.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, ArticleDetailActivity.class);
-//                intent.putExtra(ArticleDetailFragment.ARG_ITEM_INFO, datas.get(position));
-//                context.startActivity(intent);
-//            }
-//        });
-//
-//        viewHolder.title_text.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, ArticleDetailActivity.class);
-//                intent.putExtra(ArticleDetailFragment.ARG_ITEM_INFO, datas.get(position));
-//                context.startActivity(intent);
-//            }
-//        });
+        viewHolder.tag_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ArticleDetailActivity.class);
+                intent.putExtra(ArticleDetailFragment.ARG_ITEM_INFO, datas.get(position));
+                context.startActivity(intent);
+            }
+        });
+
+        viewHolder.title_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ArticleDetailActivity.class);
+                intent.putExtra(ArticleDetailFragment.ARG_ITEM_INFO, datas.get(position));
+                context.startActivity(intent);
+            }
+        });
         viewHolder.content_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
