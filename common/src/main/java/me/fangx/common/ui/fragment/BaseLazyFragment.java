@@ -30,10 +30,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.lang.reflect.Field;
 
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
 import me.fangx.common.util.CommonUtils;
 import me.fangx.common.util.eventbus.EventCenter;
 import me.fangx.common.widget.loading.VaryViewHelperController;

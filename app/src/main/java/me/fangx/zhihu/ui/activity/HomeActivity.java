@@ -230,7 +230,7 @@ public class HomeActivity extends BaseAppCompatActivity {
 
     @Override
     protected boolean isBindEventBusHere() {
-        return false;
+        return true;
     }
 
     @Override

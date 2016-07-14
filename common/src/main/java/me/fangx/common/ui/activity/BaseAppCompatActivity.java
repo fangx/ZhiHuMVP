@@ -17,7 +17,10 @@ import android.view.WindowManager;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import me.fangx.common.R;
 import me.fangx.common.ui.BaseAppManager;
 import me.fangx.common.util.CommonUtils;
@@ -416,7 +419,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
             mVaryViewHelperController.restore();
         }
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)  //在ui线程执行
     public void onEventMainThread(EventCenter eventCenter) {
         if (null != eventCenter) {
             onEventComming(eventCenter);

@@ -15,8 +15,9 @@ import android.view.WindowManager;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
 import me.fangx.common.R;
 import me.fangx.common.ui.BaseAppManager;
 import me.fangx.common.util.CommonUtils;
